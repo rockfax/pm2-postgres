@@ -1,11 +1,15 @@
-var pmx = require('pmx');
-var pgClientFactory = require('./lib/clientFactory.js');
-var pgStats = require('./lib/stats.js');
-var pgActions = require('./lib/actions.js');
+const pmx = require('pmx')
+    , pgClientFactory = require('./lib/clientFactory.js')
+    , pgStats = require('./lib/stats.js')
+    , pgActions = require('./lib/actions.js')
 
 pmx.initModule({
 
-  pid: pmx.resolvePidPaths(['/var/run/postgresql/9.4-main.pid', '/var/run/postgresql/9.3-main.pid', '/var/run/postgresql/9.5-main.pid']),
+  pid: pmx.resolvePidPaths([
+    '/var/run/postgresql/9.4-main.pid',
+    '/var/run/postgresql/9.3-main.pid',
+    '/var/run/postgresql/9.5-main.pid'
+  ]),
 
   // Options related to the display style on Keymetrics
   widget: {
@@ -33,17 +37,17 @@ pmx.initModule({
       meta: true,
 
       // Custom metrics to put in BIG
-      main_probes: ['Tables', 'Indexes','Total Tables Size','Backends Active','Exclusive Locks']
+      main_probes: ['Tables', 'Indexes', 'Total Tables Size', 'Backends Active', 'Exclusive Locks']
     }
 
   }
 
-}, function (err, conf) {
-  var pgClient = pgClientFactory.build(conf);
+}, function(_, conf) {
+  const pgClient = pgClientFactory.build(conf)
 
   // Init metrics refresh loop
-  pgStats.init(pgClient);
+  pgStats.init(pgClient)
 
   // Init actions
-  pgActions.init(pgClient);
-});
+  pgActions.init(pgClient)
+})
