@@ -8,7 +8,9 @@ pmx.initModule({
   pid: pmx.resolvePidPaths([
     '/var/run/postgresql/9.4-main.pid',
     '/var/run/postgresql/9.3-main.pid',
-    '/var/run/postgresql/9.5-main.pid'
+    '/var/run/postgresql/9.5-main.pid',
+    '/var/lib/pgsql/12/data/postmaster.pid',
+    '/var/lib/pgsql/13/data/postmaster.pid'
   ]),
 
   // Options related to the display style on Keymetrics
